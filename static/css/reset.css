@@ -1,0 +1,23 @@
+html,body,div,h1,h2,h3,h4,h5,h6,ul,ol,li,s,i,img,a,dl,dt,dd,p,input,select,
+option,form,label,pre,fieldset, textarea,header,footer,nav{margin: 0;padding: 0;font-weight: normal; vertical-align: middle;}
+html,body{width: 100%;margin:0 auto;height:100%;font-family:Arial,Helvetica,STHeiTi,sans-serif;color: #333;overflow-x:hidden;font-size:20px;}
+em,i{font-style:normal;}
+img{border: none;vertical-align: top;}
+strong,h4,h5{font-weight: normal;}
+ul,ol{list-style:none;}
+input,textarea,select,option,button{font-family:"STXihei", Arial, Helvetica, sans-serif;resize:none;background:none;outline: none;border: none;border-radius:0;-webkit-appearance: none;/*½â¾öiosÏÂ°´Å¥µÄÔ²½ÇÎÊÌâ*/}
+input[type=checkbox]{-webkit-appearance:checkbox;}
+*{-webkit-tap-highlight-color: rgba(0,0,0,0);/*¸ßÁÁ*/}
+a{text-decoration:none;font-size:100%;color:#000;outline: none;}
+.fl{float: left;}
+.fr{float: right;}
+.clearFix{display: inline-block;font-size:0;}
+.clearFix:after{display: block;content:'.';height: 0;line-height: 0;clear: both;visibility: hidden;}
+.pa{position: absolute;}
+.pr{position: relative;}
+.tr{text-align: right;}
+.ofellipsis{text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+.ofellipsis2{display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;overflow: hidden;}
+html{background:#fff;}
+body{-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
+
