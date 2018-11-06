@@ -104,7 +104,7 @@ backdrop-filter:blur(10px);/*模糊*/transition: all .6s ease;}
 
 .header .supports_list{width:80%;margin:0 auto 6px;font-size: 12px;font-weight: 200;}
 .header .supports_list li{line-height:26px;padding-left:12px;}
-.header .supports_list .icon{display: inline-block;font-size: 0;width: 16px;height: 16px;background-repeat: no-repeat;background-size:16px;margin-right:6px;}
+.header .supports_list .icon{display: inline-block;vertical-align: middle;font-size: 0;width: 16px;height: 16px;background-repeat: no-repeat;background-size:16px;margin-right:6px;}
 .header .detail_wrapper .info{width: 80%;margin: 0 auto;font-size:12px;font-weight: 200;line-height: 24px;padding:0 12px;box-sizing:border-box;}
 
 

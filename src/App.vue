@@ -20,18 +20,17 @@ export default {
     };
   },
   created() {
-    this.$http
-      .get("/api/seller")
-      .then(res => {
-        var json = res.data;
-        if (json.errno === 0) {
-          this.seller = json.data;
-        } else {
-        }
-      })
-      .catch(err => {
-        console.log(err);        
-      });
+    this.$http.get("/api/seller")
+              .then(res => {
+                var json = res.data;
+                if (json.errno === 0) {
+                  this.seller = json.data;
+                } else {
+                }
+              })
+              .catch(err => {
+                console.log(err);        
+              });
   },
   components: {
     "v-header": header
@@ -43,13 +42,13 @@ export default {
   display: flex;
   width: 100%;
   line-height:40px;
+  border-bottom: 1px solid #f2f2f2;
   position: relative;
   z-index: 10;
 }
 .tab .tab-item {
   flex: 1;
   text-align: center;
-  border-bottom: 1px solid #f2f2f2;
   font-size:14px;
   color: rgb(77,85,93)
 }

@@ -10,7 +10,7 @@
                 </div>
                 <div class="price fl">￥{{totalPrice}}</div>
             </div>
-            <div class="desc fl">另需要配送费￥{{deliveryPrice}}</div>
+            <div class="desc ">另需要配送费￥{{deliveryPrice}}</div>
         </div>
         <div class="r_cont pay" :class="[totalPrice >= minPrice ? 'enough':''] " @click="toPay"> {{payDecs}} </div>
         <div class="ball_container">
@@ -159,7 +159,6 @@ export default {
       //此方法在父组件goods.vue调用了
       for (let i = 0; i < this.balls.length; i++) {
         let ball = this.balls[i];
-        console.log(ball);
         if (!ball.show) {
           ball.show = true;
           ball.el = el;
@@ -217,17 +216,17 @@ export default {
 .shopcart .cont{display: flex;background: #141D27;position: relative;z-index:2;}
 .shopcart .cont .l_cont{flex:1;}
 .shopcart .l_cont .logo_wrap:after{position: absolute;top:12px;right: 0;content:'';height:24px;width: 1px;background:rgba(255,255,255,0.1);}
-.shopcart .l_cont .logo{width:44px;height:44px;line-height: 44px;text-align: center;background:#2B343C;border-radius:50%;margin: -8px 12px 0;
+.shopcart .l_cont .logo{width:44px;height:44px;line-height: 44px;text-align: center;background:#2B343C;border-radius:50%;margin: -8px 6px 0;
 border:6px solid #141D27;z-index: 99;}
 .shopcart .l_cont .logo .iconfont{font-size:24px;color:rgba(255,255,255,0.4)}
 .shopcart .l_cont .logo .total_count{position: absolute;top:-5px;right:-8px;font-size:10px;color:#fff;background: #F01414;
 padding:0 7px;line-height:16px;border-radius:8px;}
 .shopcart .l_cont .logo_wrap .price{font-size:16px;font-weight: 700;color:rgba(255,255,255,0.4);margin-right:12px;}
-.shopcart .l_cont .desc{margin-left:12px;font-size:12px;color:rgba(255,255,255,0.4);}
+.shopcart .l_cont .desc{font-size:12px;color:rgba(255,255,255,0.4);text-align: center;}
 .shopcart .l_cont .hasfoods .logo{background:#00A0DC;}
 .shopcart .l_cont .hasfoods .iconfont{color:#fff;}
 .shopcart .l_cont .hasfoods .price{color:#fff;}
-.shopcart .cont .pay{flex:0 0 105px;width: 105px;background:#2B333B;font-size: 12px;color:rgba(255,255,255,.4);font-weight: 700;text-align: center}
+.shopcart .cont .pay{flex:0 0 96px;width: 96px;background:#2B333B;font-size: 12px;color:rgba(255,255,255,.4);font-weight: 700;text-align: center}
 .shopcart .cont .pay.enough{background: #00b43c;color:#fff;}
 
 .ball_container .ball{position: fixed;left:32px;bottom:22px;z-index:1;transition:all .6s cubic-bezier(0.49, -0.29, 0.75, 0.41);}

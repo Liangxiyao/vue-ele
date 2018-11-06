@@ -16,7 +16,7 @@
                     <li v-for="food in item.foods" :key="food.name" class="food_item" @click="foodDetail(food,$event)">
                         <div class="img"><img width="100%" height="100%" :src="food.icon" alt=""></div>
                         <div class="content">
-                            <h2 class="name">{{food.name}}</h2>
+                            <h2 class="name ofellipsis">{{food.name}}</h2>
                             <p class="desc">{{food.description}}</p>
                             <div class="extra">
                                 <span class="count">月售{{food.sellCount}}</span>
@@ -67,20 +67,19 @@ export default {
     foodDetail
   },
   created() {
-      this.$http
-        .get("/api/goods")
-        .then(res => {
-            var json = res.data;
-            if (json.errno === 0) {
-            this.goods = json.data;
-            this.$nextTick(() => {
-                this.initScroll();
-                this.computeHeight();
-            });
-            }
-        }).catch(err => {
-            console.log(err);
-        });
+      this.$http.get("/api/goods")
+                .then(res => {
+                    var json = res.data;
+                    if (json.errno === 0) {
+                    this.goods = json.data;
+                    this.$nextTick(() => {
+                        this.initScroll();  //初始化滚动插件
+                        this.computeHeight();//计算屏幕高度
+                    });
+                    }
+                }).catch(err => {
+                    console.log(err);
+                });
     },
   computed: {
     currentIndex(){
@@ -167,7 +166,7 @@ export default {
 .foods_wrapper .food_item{display: flex;padding: 18px 0;border-bottom:1px solid rgba(7,17,27,0.1);}
 .foods_wrapper .food_item:last-of-type{border-bottom:none;}
 .foods_wrapper .food_item .img{flex:0 0 57px;height:57px;margin-right: 10px;}
-.foods_wrapper .food_item .content{flex:1;}
+.foods_wrapper .food_item .content{flex:1;width: 0;}
 .foods_wrapper .food_item .content .name{font-size:14px;color:rgb(7,17,27);line-height: 14px;margin:2px 0 8px;}
 .foods_wrapper .food_item .content .desc,
 .foods_wrapper .food_item .content .price,
