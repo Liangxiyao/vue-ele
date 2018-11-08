@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <v-header :seller="seller"></v-header>
+    <v-header :seller="seller" ></v-header>
     <div class="tab">
       <router-link class="tab-item" to="/goods">商品</router-link>
       <router-link class="tab-item" to="/ratings">评价</router-link>
       <router-link class="tab-item" to="/seller">商家</router-link>
     </div>
-    <router-view :seller="seller"/>
+    <keep-alive><router-view :seller="seller"/></keep-alive>
   </div>
 </template>
 <script>
@@ -16,7 +16,8 @@ export default {
   name: "App",
   data() {
     return {
-      seller: {}
+      seller: {},
+      selectFood:[]
     };
   },
   created() {
@@ -34,6 +35,8 @@ export default {
   },
   components: {
     "v-header": header
+  },
+  methods:{
   }
 };
 </script>

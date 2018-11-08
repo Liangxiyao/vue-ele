@@ -71,11 +71,11 @@ export default {
                 .then(res => {
                     var json = res.data;
                     if (json.errno === 0) {
-                    this.goods = json.data;
-                    this.$nextTick(() => {
-                        this.initScroll();  //初始化滚动插件
-                        this.computeHeight();//计算屏幕高度
-                    });
+                        this.goods = json.data;
+                        this.$nextTick(() => {
+                            this.initScroll();  //初始化滚动插件
+                            this.computeHeight();//计算屏幕高度
+                        });
                     }
                 }).catch(err => {
                     console.log(err);
@@ -94,15 +94,16 @@ export default {
       }
       return 0;
     },
-    selectFoods(){
+    selectFoods(){  //购物车里的商品
         let foods = [];
         this.goods.forEach((good) => {
             good.foods.forEach((food)=>{
                 if(food.count>0){
-                    foods.push(food)
+                    foods.push(food);
                 }
             })
         });
+        console.log(foods);
         return foods;
     }
   },
@@ -135,7 +136,6 @@ export default {
       }
     },
     clickMenu(index, event) {
-      console.log(event);
       let foodList = this.$refs.foods.getElementsByClassName("food_list_hook");
       let el = foodList[index];
       this.foodsScroll.scrollToElement(el, 30); //http://ustbhuangyi.github.io/better-scroll/doc/api.html
@@ -153,7 +153,7 @@ export default {
 };
 </script>
 <style>
-.goods{display: flex;position: absolute;width: 100%;top: 174px;bottom: 46px;overflow: hidden;}
+.goods{display: flex;position: absolute;width: 100%;top: 174px;bottom: 48px;overflow: hidden;}
 .goods .menu_wrapper{flex:0 0 80px;width: 80px;background:#f3f5f7;overflow: hidden;}
 .goods .menu_item{display: table;height:54px;width: 56px;line-height: 14px;padding:0 12px;}
 .goods .menu_item.current{background:#fff;position: relative;top:-1px;border-bottom: 0;}
