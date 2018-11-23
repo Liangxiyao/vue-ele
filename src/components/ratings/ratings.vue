@@ -64,7 +64,8 @@
         </div>     
     </div>
     <shopcart :delivery-price="seller.deliveryPrice"  ref="shopcart"
-              :min-price="seller.minPrice"></shopcart>
+              :min-price="seller.minPrice"
+              :select-foods="selectFoods"></shopcart>
 </div>
 </template>
 <script type="text/ecmascript-6">
@@ -72,6 +73,7 @@ import BScroll from "better-scroll";
 import shopcart from "components/shopcart/shopcart"
 import star from "components/star/star.vue";
 import {timestampToTime} from "@/utils/public.js";
+import state from "@/state.js"
 
 
 export default {
@@ -87,6 +89,7 @@ export default {
             checked:false,
             ratings:[],
             activeType:2,
+            selectFoods:[]
         }
     },
     created(){
@@ -96,12 +99,20 @@ export default {
                       if(json.errno === 0){
                           this.ratings = json.data;      
                           this.$nextTick(() => {
-                            this._initScroll();  //初始化滚动插件
+                            this._initScroll();  //初始化滚动插件 
                           });                    
                       }
                     }).catch(err => {
                         console.log(err);
                     });
+    },
+    activated(){
+        /* if(localStorage.getItem('cartData')){
+            this.selectFoods = JSON.parse(localStorage.getItem('cartData'))
+            
+        }else{
+            this.selectFoods = state.selectfoodData;
+        } */
     },
     computed:{
         rateTypes(){ 

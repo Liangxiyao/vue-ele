@@ -11,10 +11,18 @@
 </template>
 
 <script>
+import state from '@/state.js';
+
 export default {
     props:{
         food:{
             type:Object
+        }
+    },
+    data(){
+        return {
+            nowfood:this.food,
+            state,
         }
     },
     methods:{
@@ -24,11 +32,11 @@ export default {
             }else{
                 this.food.count++;
             }
-            this.$emit('cart-add',event.target)
+            this.$emit('cart-add',event.target);
         },
         cutCount(){
             if(this.food.count){
-                this.food.count --;
+                this.food.count --;          
             }
         }
     }

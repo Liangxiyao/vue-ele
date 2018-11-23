@@ -33,7 +33,7 @@
           </div>
           <div class="list_wrap" ref="cartListWrap">
             <ul class="lists">
-              <li class="food cleaxFix" v-for="(food,i) in selectFoods" :key="i">
+              <li class="food cleaxFix" v-for="(food,i) in selectFoods" :key="i" v-if="food.count">
                 <span class="name">{{food.name}}</span>
                 <div class="countControl_wrap fr">
                   <cart-control :food="food"></cart-control>

@@ -68,13 +68,15 @@
             </div>
         </div>
         <shopcart :delivery-price="seller.deliveryPrice"  ref="shopcart"
-                    :min-price="seller.minPrice"></shopcart>
+                    :min-price="seller.minPrice"
+                    :select-foods="selectFoods"></shopcart>
     </div>    
 </template>
 <script type='text/ecmasctipt-6'>
 import star from "components/star/star.vue";
 import BScroll from "better-scroll";
 import shopcart from "components/shopcart/shopcart.vue";
+import state from "@/state.js"
 
 export default {
     components:{
@@ -86,7 +88,8 @@ export default {
     },
     data(){
         return{
-            collection:false
+            collection:false,
+            selectFoods:[]
         }
     },
     created(){
@@ -94,6 +97,9 @@ export default {
             this._initScroll();  //初始化滚动插件
             this._initPicScroll();
         });
+    },
+    activated(){
+        this.selectFoods = state.selectfoodData;
     },
     methods:{
         _initScroll(){

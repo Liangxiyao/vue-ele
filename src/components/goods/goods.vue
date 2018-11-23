@@ -44,7 +44,8 @@
 import BScroll from "better-scroll";
 import shopcart from "components/shopcart/shopcart.vue";
 import cartControl from "components/cartControl/cartControl.vue";
-import foodDetail from "components/foodDetail/foodDetail.vue"
+import foodDetail from "components/foodDetail/foodDetail.vue";
+import state from "@/state.js";
 
 export default {
   data() {
@@ -53,7 +54,9 @@ export default {
       listHeight: [],
       menuScrollY: 0,
       foodsScrollY: 0,
-      selectedfood:{}
+      selectedfood:{},
+      state,
+      dd:[]
     };
   },
   props: {
@@ -64,7 +67,7 @@ export default {
   components: {
     shopcart,
     cartControl,
-    foodDetail
+    foodDetail,
   },
   created() {
       this.$http.get("/api/goods")
@@ -72,9 +75,12 @@ export default {
                     var json = res.data;
                     if (json.errno === 0) {
                         this.goods = json.data;
-                        this.$nextTick(() => {
+                        this.$nextTick(() => {                            
                             this.initScroll();  //初始化滚动插件
-                            this.computeHeight();//计算屏幕高度
+                            this.computeHeight();//计算屏幕高度   
+                           // this.dd = JSON.parse(localStorage.getItem('cartData'))
+
+                            
                         });
                     }
                 }).catch(err => {
@@ -95,7 +101,23 @@ export default {
       return 0;
     },
     selectFoods(){  //购物车里的商品
-        let foods = [];
+        let foods= [];       
+        let arr = JSON.parse(localStorage.getItem('cartData'));
+        console.log(arr);
+        
+        if(arr && arr.length){  //如果本都存储有数据 
+           // foods = arr;
+            //此处是不是应该将 这个数据更新到goods 里面？
+            this.goods.forEach((good) => {
+                good.foods.forEach((food)=>{
+                    arr.forEach((item)=>{
+                        if(item.name == food.item){
+                           food.count =  item.count ;
+                        }
+                    })           
+                })
+            });
+        }
         this.goods.forEach((good) => {
             good.foods.forEach((food)=>{
                 if(food.count>0){
@@ -103,7 +125,10 @@ export default {
                 }
             })
         });
-        console.log(foods);
+        
+      //  state.selectfoodData = foods;   //将购物车数据赋值给中间件，以便于同步到其他页面
+
+        localStorage.setItem('cartData',JSON.stringify(foods));
         return foods;
     }
   },
@@ -157,7 +182,7 @@ export default {
 .goods .menu_wrapper{flex:0 0 80px;width: 80px;background:#f3f5f7;overflow: hidden;}
 .goods .menu_item{display: table;height:54px;width: 56px;line-height: 14px;padding:0 12px;}
 .goods .menu_item.current{background:#fff;position: relative;top:-1px;border-bottom: 0;}
-.goods .menu_item .txt{display: table-cell;vertical-align: middle;font-size:12px;color:#333;border-bottom: 1px solid rgba(7,17,27,0.1)}
+.goods .menu_item .txt{display: table-cell;vertical-align: middle;font-size:12px;color:#333;  border-bottom: 1px solid rgba(7,17,27,0.1)}
 .goods .menu_item.current .txt{border-bottom:0;font-weight: 700;}
 
 .foods_wrapper{flex:1;}
