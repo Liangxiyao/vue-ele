@@ -10,18 +10,18 @@
                 </dl>
                 <ul class="score_list">
                     <li class="item">
-                        <span class="txt">服务态度 </span> 
+                        <span class="txt">服务态度 </span>
                         <star :size="36" :score="seller.serviceScore"></star>
-                        <span class="score">{{seller.serviceScore}}</span>                   
+                        <span class="score">{{seller.serviceScore}}</span>
                     </li>
                     <li class="item">
-                        <span class="txt">商品评分 </span> 
+                        <span class="txt">商品评分 </span>
                         <star :size="36" :score="seller.foodScore"></star>
-                        <span class="score">{{seller.foodScore}}</span>                   
+                        <span class="score">{{seller.foodScore}}</span>
                     </li>
                     <li class="item">
-                        <span class="txt">送达时间 </span> 
-                        <span class="time">{{seller.deliveryTime}}分钟</span>                   
+                        <span class="txt">送达时间 </span>
+                        <span class="time">{{seller.deliveryTime}}分钟</span>
                     </li>
                 </ul>
             </div>
@@ -29,7 +29,7 @@
             <div class="ratings">
                 <div class="rate_header">
                     <div class="rateType" >
-                    <span class="type" v-if="rateTypes" v-for="(item,i) in rateTypes" :key="i" 
+                    <span class="type" v-if="rateTypes" v-for="(item,i) in rateTypes" :key="i"
                                             :class="{'nolike':i == 2, 'active':activeType == item.type}"
                                             @click="switchType(item.type)">
                                             {{item.name}}<em>{{item.count}}</em>
@@ -37,17 +37,17 @@
                     </div>
                     <div class="tip" @click="checkedCont" :class="{checked:checked}"><i class="iconfont icon-radio"></i>只看有内容的评价</div>
                 </div>
-                <div class="ratings_wrap"> 
+                <div class="ratings_wrap">
                     <ul class="rating_list" v-if="ratings && ratings.length>0">
                         <li class="item" v-for="(rating,i) in ratings" :key="i" v-show="needShow(rating.rateType,rating.text)">
-                            <img class="avatar" width="28px" height="28px" :src="rating.avatar"/>  
+                            <img class="avatar" width="28px" height="28px" :src="rating.avatar"/>
                             <div class="time">{{toTime(rating.rateTime)}}</div>
                             <div class="desc">
-                                <div class="user">   
+                                <div class="user">
                                     <p class="name">{{rating.username}}</p>
                                     <star :size="24" :score="rating.score"></star>
                                     <span class="deliveryTime" v-if="rating.deliveryTime">{{rating.deliveryTime}}分钟送达</span>
-                                </div>  
+                                </div>
                                 <div class="text">{{rating.text}}</div>
                                 <div class="likefoods" v-if="rating.recommend.length">
                                     <i class="iconfont fl" :class="{'icon-like':rating.rateType==0,'icon-nolike':rating.rateType==1}"></i>
@@ -55,13 +55,13 @@
                                         <li class="food ofellipsis" v-for="(food,i) in rating.recommend" :key="i">{{food}}</li>
                                     </ul>
                                 </div>
-                            </div>                
+                            </div>
                         </li>
                     </ul>
                     <div  v-else class="noRating">暂无评价</div>
                 </div>
             </div>
-        </div>     
+        </div>
     </div>
     <shopcart :delivery-price="seller.deliveryPrice"  ref="shopcart"
               :min-price="seller.minPrice"
@@ -89,7 +89,7 @@ export default {
             checked:false,
             ratings:[],
             activeType:2,
-            selectFoods:[]
+            selectFoods:JSON.parse(localStorage.getItem('cartData')) || []
         }
     },
     created(){
@@ -97,10 +97,10 @@ export default {
                   .then(res=>{
                       var json = res.data;
                       if(json.errno === 0){
-                          this.ratings = json.data;      
+                          this.ratings = json.data;
                           this.$nextTick(() => {
-                            this._initScroll();  //初始化滚动插件 
-                          });                    
+                            this._initScroll();  //初始化滚动插件
+                          });
                       }
                     }).catch(err => {
                         console.log(err);
@@ -109,14 +109,14 @@ export default {
     activated(){
         /* if(localStorage.getItem('cartData')){
             this.selectFoods = JSON.parse(localStorage.getItem('cartData'))
-            
+
         }else{
             this.selectFoods = state.selectfoodData;
         } */
     },
     computed:{
-        rateTypes(){ 
-            if(this.ratings && this.ratings.length){  
+        rateTypes(){
+            if(this.ratings && this.ratings.length){
                 var data = [
                     {
                         name:'全部',
@@ -131,8 +131,8 @@ export default {
                         count:this.ratings.filter(data => data.rateType == 1).length,
                         type:1
                     }
-                ]  
-            return data;  
+                ]
+            return data;
             }
         }
     },
@@ -141,13 +141,13 @@ export default {
             this.ratingsScroll = new BScroll(this.$refs.ratingsScroll, {
                 click: true, //默认关闭浏览器原生的点击事件，设置true ，将派发一个click事件
                 probeType: 3,
-                
+
             });
             console.log(this.ratingsScroll);
-            
+
         },
         checkedCont(){
-            this.checked = !this.checked;     
+            this.checked = !this.checked;
         },
         toTime(value){
             let time = timestampToTime(value)
@@ -156,8 +156,8 @@ export default {
         checkedCont(){
             this.checked = !this.checked;
         },
-        switchType(type){     
-            this.activeType = type;        
+        switchType(type){
+            this.activeType = type;
         },
         needShow(type,text){
             if(this.checked && !text){

@@ -2,7 +2,7 @@
     <div class="seller">
         <div class="scroll_wrap" ref="ratingsScroll">
             <div class="cont">
-                <div class="seller_detail module"> 
+                <div class="seller_detail module">
                     <div class="collect" :class="{'checked':collection}" @click="toggleCollect">
                         <div class="iconfont icon-collection"></div>
                         <div class="txt">{{collection?'已收藏':'收藏'}}</div>
@@ -70,9 +70,9 @@
         <shopcart :delivery-price="seller.deliveryPrice"  ref="shopcart"
                     :min-price="seller.minPrice"
                     :select-foods="selectFoods"></shopcart>
-    </div>    
+    </div>
 </template>
-<script type='text/ecmasctipt-6'>
+<script>
 import star from "components/star/star.vue";
 import BScroll from "better-scroll";
 import shopcart from "components/shopcart/shopcart.vue";
@@ -89,7 +89,7 @@ export default {
     data(){
         return{
             collection:false,
-            selectFoods:[]
+            selectFoods:JSON.parse(localStorage.getItem('cartData')) || []
         }
     },
     created(){
@@ -99,7 +99,7 @@ export default {
         });
     },
     activated(){
-        this.selectFoods = state.selectfoodData;
+//        this.selectFoods = state.selectfoodData;
     },
     methods:{
         _initScroll(){
