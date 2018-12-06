@@ -153,7 +153,9 @@ export default {
       if(this.totalPrice < this.minPrice){
         return;
       }
-      alert('去支付')
+      alert('去支付');
+      localStorage.removeItem('cartData');
+      window.location.reload()
     },
     drophandle(el) {
       //此方法在父组件goods.vue调用了

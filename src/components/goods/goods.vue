@@ -56,7 +56,6 @@
         foodsScrollY: 0,
         selectedfood: {},
         state,
-        dd: [],
         selectFoodsData: JSON.parse(localStorage.getItem('cartData')) || []
       };
     },
@@ -81,16 +80,6 @@
               this.computeHeight();//计算屏幕高度
               let foods = JSON.parse(localStorage.getItem('cartData')) || []
               if (foods && foods.length > 0) {
-//                this.goods.forEach((good) => {
-//                  good.foods.forEach((food) => {
-//                    for (let i = 0; i < foods.length; i++) {
-//                      if (foods[i].count > 0 && foods[i].name == food.name) {
-//                        this.$set(food, "count", foods[i].count)
-//                        break
-//                      }
-//                    }
-//                  })
-//                });
                 let isBreak = false
                 for(let j=0;j<this.goods.length;j++){
                   this.goods[j].foods.forEach((food) => {
@@ -106,7 +95,6 @@
                   }
                 }
               }
-
             });
           }
         }).catch(err => {
@@ -184,11 +172,9 @@
         this.foodsScroll.scrollToElement(el, 30); //http://ustbhuangyi.github.io/better-scroll/doc/api.html
       },
       cartAdd(el) {
-
         this.$nextTick(() => {
           this.$refs.shopcart.drophandle(el);
           this.selectFoods()
-
         })
       },
       cartCut() {
