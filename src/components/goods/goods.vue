@@ -146,9 +146,10 @@
       },
       selectFoods() {  //购物车里的商品
         let foods = this.selectFoodsData
+        console.log(this.goods)
         this.goods.forEach((good) => {
           good.foods.forEach((food) => {
-            if (food.count > 0) {
+            if (food.count >= 0) {
               let isHave = false;
               for (let i = 0; i < foods.length; i++) {
                 if (foods[i].name == food.name) {
