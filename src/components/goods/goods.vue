@@ -37,7 +37,7 @@
               :min-price="seller.minPrice"
               :select-foods="selectFoodsData">
     </shopcart>
-    <food-detail :food="selectedfood" ref="shopDetail" @cart-add="cartAdd"></food-detail>
+    <food-detail :food="selectedfood" ref="shopDetail" @food-detail-cart-add="cartAdd" @food-detail-cart-cut="cartCut"></food-detail>
   </div>
 </template>
 <script>
@@ -184,6 +184,7 @@
         this.foodsScroll.scrollToElement(el, 30); //http://ustbhuangyi.github.io/better-scroll/doc/api.html
       },
       cartAdd(el) {
+
         this.$nextTick(() => {
           this.$refs.shopcart.drophandle(el);
           this.selectFoods()
